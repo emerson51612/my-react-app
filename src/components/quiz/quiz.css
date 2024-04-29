@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600; 
+  box-sizing: border-box;
+}
+
+#question{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400; /* Thin weight */
+}
+
+body{
+  background: #001e4d;  /* change to background of car still frame later, question pops up*/
+}
+
+.quiz_comp{
+background: #fff;
+width: 90%;
+max-width: 600px;
+margin: 100px auto 0;
+border-radius: 10px;
+padding: 30px;
+}
+
+.quiz_comp h1{
+font-size: 25px;
+color: #001e4d;
+border-bottom: 1px solid #333;
+padding-bottom: 30px; 
+}
+
+.quiz1 {
+padding: 20px 0;
+}
+
+.quiz1 h2{
+font-size: 18px;
+color:#001e4d;
+}
+
+.btn{
+background: #fff;
+color:#222;
+font-weight:400;
+width: 100%;
+border: 1px solid #222;
+padding: 10px;
+margin: 10px 0;
+text-align: left;
+border-radius:4;
+cursor:pointer
+}
+
+.btn:hover{
+background: #222;
+color:#fff
+}
+
+#next_btn{
+background: #001e4d;
+color:#fff;
+font-weight: 400;
+width:150px;
+border: 0;
+padding: 10px;
+margin: 20px auto 0;
+border-radius: 4px;
+cursor: pointer;
+display: none;
+}
