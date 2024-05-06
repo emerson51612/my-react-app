@@ -1,0 +1,125 @@
+body {
+color: white;    
+}
+
+.title{
+font-size: 50px;
+
+
+}
+
+.boogaloo-regular {
+    font-family: "Boogaloo", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+.main-container {
+    margin: 2rem;
+    font-family: "Boogaloo", sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    opacity: 85%;
+    color: darkblue;
+    padding: 1.5rem 3rem;
+}
+
+.menu-icon {
+    cursor: pointer;
+}
+
+.create-button {
+    background-color: white;
+    border: 1px solid black;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: black;
+}
+
+.table {
+    width: 100%;
+    margin-top: 5rem;
+    height: 300px;
+}
+
+button.button_edit1{
+    margin-right: 0.5rem;
+    background: none;        /* Removes background */
+    color: #38b334;          /* Sets text color to blue */
+    border: none;            /* Removes border */
+    padding: 5px 10px;       /* Padding for better clickability */
+    font-size: 28px;         /* Adjusts font size */
+    cursor: pointer;         /* Changes cursor to pointer to indicate it's clickable */
+    text-decoration: none;   /* No underline by default */
+}
+
+button.button_delete1 {
+    margin-right: 0.5rem;
+    background: none;        /* Removes background */
+    color: #ff0000;          /* Sets text color to blue */
+    border: none;            /* Removes border */
+    padding: 5px 10px;       /* Padding for better clickability */
+    font-size: 28px;         /* Adjusts font size */
+    cursor: pointer;         /* Changes cursor to pointer to indicate it's clickable */
+    text-decoration: none;   /* No underline by default */
+}
+
+
+button:hover, button:focus {
+    color: #004494;          /* Darker blue on hover/focus */
+    text-decoration: underline; /* Underline on hover/focus to indicate it's clickable */
+    outline: none;           /* Removes the outline on focus */
+}
+
+
+.th_1{
+font-family:"Boogaloo", sans-serif;
+font-size: 32px ;
+color: darkblue;
+
+}
+
+section {
+background: white;
+opacity: 85%;
+}
+
+.navbar{
+margin-top: 25px;
+}
+
+.title{
+    font-family:"Boogaloo", sans-serif;
+    font-size: 50px ;
+    color: darkblue;
+}
+
+.menu-icon{
+    font-size: 40px;
+}
+
+
+button.button_create1 {
+    margin-right: 0.5rem;
+    background: none;        /* Removes background */
+    color: #02b3ff;          /* Sets text color to blue */
+    border: none;            /* Removes border */
+    padding: 5px 10px;       /* Padding for better clickability */
+    font-size: 28px;         /* Adjusts font size */
+    cursor: pointer;         /* Changes cursor to pointer to indicate it's clickable */
+    text-decoration: none;  
+    font-family:"Boogaloo", sans-serif; ;
+}
+
+button.button_create1:hover,.button_create1:focus {
+    color: #004494;          /* Darker blue on hover/focus */
+    text-decoration: underline; /* Underline on hover/focus to indicate it's clickable */
+    outline: none;           /* Removes the outline on focus */
+}
+
