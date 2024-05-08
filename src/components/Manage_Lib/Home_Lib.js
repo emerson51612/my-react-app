@@ -28,7 +28,7 @@ function Home_Lib() {
             <div className="navbar">
                 <div className="menu-icon">☰</div>
                 <div className="title">Manage Library</div>
-                <button className="button_create1" onclick={handleCreate}>Create</button>
+                <button className="button_create1">Create</button>
             </div>
         
                 <head>

@@ -23,7 +23,6 @@ function Home_Lib_Car() {
 
     return (
         
-        
         <div>
             <div className="navbar">
                 <div className="menu-icon">☰</div>

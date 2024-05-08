@@ -1,0 +1,25 @@
+.cairo{
+    font-family: "Cairo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    color: black;
+    font-variation-settings:
+      "slnt" 0;
+  }
+
+.mysidenav {
+background-color: white;
+font-family:"Cairo";
+}
+
+* {
+color: black;
+}
+
+
+.sidenav-nav .sidenav-navitem {
+    color: black !important;
+}
+
+.txt {color:black !important;}
