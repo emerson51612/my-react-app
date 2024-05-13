@@ -1,6 +1,5 @@
 import react, {useState, useEffect} from "react";
 import {Button, Form} from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Races_Lib_Car from './Races_Lib_Car'; 
 import {v4 as uuid} from "uuid";
 import {Link, useNavigate} from "react-router-dom";

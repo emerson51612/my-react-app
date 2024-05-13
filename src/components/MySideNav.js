@@ -27,7 +27,7 @@ function MySideNav() {
                     <NavIcon>
                         <i className="fa fa-fw fa-home" style={{ fontSize: "1.5em", color: "black" }} />
                     </NavIcon>
-                    <NavText className="txt" style={{ fontSize: "1.5em", color: "black", }}>Manage</NavText>
+                    <NavText className="txt" style={{ fontSize: "3em", color: "black", }}>Manage</NavText>
                     <NavItem>
                         <NavIcon>
                             <i className="fa-solid fa-book" style={{ color: "black" }}></i>

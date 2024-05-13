@@ -1,6 +1,5 @@
 import react, {useState} from "react";
 import {Button, Form} from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Races_Lib_Sess from './Races_Lib_Sess'; 
 import {v4 as uuid} from "uuid";
 import {Link, useNavigate} from "react-router-dom";
@@ -26,7 +25,7 @@ function Add_Lib_Sess() {
     }
 
     return <div>
-        <Form className="d_grid_gap_2" style={{margin: "15rem"}}>
+        <Form className="d_grid_gap_2" style={{margin: "15rem" }}>
             <Form.Group className="mb_3" controlId="formName">
                 <Form.Control type="text" placeholder="Enter Name" required onChange={(e) => setName(e.target.value)}>
                 </Form.Control>

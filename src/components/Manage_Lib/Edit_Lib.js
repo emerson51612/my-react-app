@@ -1,56 +1,69 @@
-import react, {useState, useEffect} from "react";
-import {Button, Form} from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Races_Lib from './Races_Lib'; 
-import {v4 as uuid} from "uuid";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import _axios, { BASE_URL } from "../../utility/Axios";
+import { toast } from 'react-toastify';
+import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
+function Edit_Lib({ setTitle }) {
+  useEffect(() => {
+    setTitle("Edit Library");
+  }, []);
 
-function Edit_Lib(){
-    const [name, setName] = useState("");
-    const [date_of_publish, setDate_of_publish] = useState("");
-    const [id, setId] = useState("");
+  const [library, setLibrary] = useState({});
+  const [question_list, setQuestionList] = useState([]);
 
-    let history = useNavigate();
+  const [name, setName] = useState("");
+  const [date_of_publish, setDate_of_publish] = useState("");
+  const [id, setId] = useState("");
 
-    var index = Races_Lib.map(function(e){
-        return e.id;
-        }).indexOf(id);
+  let history = useNavigate();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    history("/");
+  };
 
-    const handleSubmit =(e) => {
-            e.preventDefault();
-            
-            let a = Races_Lib[index];
-            a.name = name;
-            a.date_of_publish = date_of_publish;
+  const handleGetLibrary = async () => {
+    // Call API to get library by id
+  };
 
-    
-            history("/")
-        }
-
-        useEffect(() => {
-            setName(localStorage.getItem("name"));
-            setDate_of_publish(localStorage.getItem("date_of_publish"));
-            setId(localStorage.getItem("id"));
-        },[])
-
-    return(
-        <div>
-        <Form className="d_grid_gap_2" style={{margin: "15rem"}}>
-            <Form.Group className="mb_3" controlId="formName">
-                <Form.Control type="text" placeholder="Enter Name" required value={name} onChange={(e) => setName(e.target.value)}>
-                </Form.Control>
-            </Form.Group>
-            <Form.Group className="mb_3" controlId="formDate_of_publish">
-                <Form.Control type="text" placeholder="Enter Date of Publish" required value={date_of_publish} onChange={(e) => setDate_of_publish(e.target.value)}>
-                </Form.Control>
-                <Button onClick={(e)=> handleSubmit(e)} type="submit">Update</Button>
-            </Form.Group>
-        </Form>    
-        </div>
-    )
-
+  const handleGetQuestions = async () => {
+    try {
+      const resp = await _axios.get(`${BASE_URL}/api/v1/question?library_id=${id}`, {
+        withCredentials: true,
+      });
+    } catch (error){
+      toast.error(error.response.data.error);
+    }
+  }
+  return (
+    <div style={{ height: "85vh", paddingTop: "1rem" }}>
+      <Form
+        style={{ marginLeft: "15rem", marginRight: "15rem" }}
+        onSubmit={handleSubmit}
+      >
+        <Form.Group className="mb-3">
+          <Form.Label style={{ color: "white" }}>Library name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter library name"
+            defaultValue={name}
+            required
+            name="library_name"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label style={{ color: "white" }}>
+            Library Description (Optional)
+          </Form.Label>
+          <Form.Control as="textarea" rows={3} name="description" />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Button type="submit">Update Library</Button>
+        </Form.Group>
+      </Form>
+    </div>
+  );
 }
 
 export default Edit_Lib;

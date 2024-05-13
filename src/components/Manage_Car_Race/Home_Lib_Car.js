@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Races_Lib_Car from './Races_Lib_Car';
 import { Link, useNavigate } from 'react-router-dom';
 import './Manage_Lib_Car.css'; // Import the separate CSS file for styles

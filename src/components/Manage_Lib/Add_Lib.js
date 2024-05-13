@@ -1,43 +1,58 @@
-import react, {useState} from "react";
-import {Button, Form} from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Races_Lib from './Races_Lib'; 
-import {v4 as uuid} from "uuid";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useEffect } from "react";
+import { toast } from 'react-toastify';
+import _axios, { BASE_URL } from "../../utility/Axios";
+import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-function Add_Lib() {
+function Add_Lib({ setTitle }) {
+  useEffect(() => {
+    setTitle("Add Library");
+  }, []);
 
-    const [name, setName] = useState("");
-    const [date_of_publish, setDate_of_publish] = useState("");
+  let history = useNavigate();
 
-    let history = useNavigate();
-
-    const handleSubmit =(e) => {
-        e.preventDefault();
-        const ids = uuid();
-        let UniqueId = ids.slice(0, 8);
-
-        let a = name,
-        b = date_of_publish;
-
-        Races_Lib.push({id: UniqueId, name: a, date_of_publish: b});
-
-        history("/")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formDatas = new FormData(form);
+    const formJson = Object.fromEntries(formDatas.entries());
+    try {
+      const resp = await _axios.post(`${BASE_URL}/api/v1/library/create`, formJson, {
+        withCredentials: true,
+      });
+      if (resp.data.error_code === 0) {
+        toast.success("Library added successfully");
+        history("/management/library");
+      }
+      else {
+        toast.error(resp.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.error);
     }
+  };
 
-    return <div>
-        <Form className="d_grid_gap_2" style={{margin: "15rem"}}>
-            <Form.Group className="mb_3" controlId="formName">
-                <Form.Control type="text" placeholder="Enter Name" required onChange={(e) => setName(e.target.value)}>
-                </Form.Control>
-            </Form.Group>
-            <Form.Group className="mb_3" controlId="formDate_of_publish">
-                <Form.Control type="text" placeholder="Enter Date of Publish" required onChange={(e) => setDate_of_publish(e.target.value)}>
-                </Form.Control>
-                <Button onClick={(e)=> handleSubmit(e)} type="submit">Submit</Button>
-            </Form.Group>
-        </Form>
-            </div>;
+  return (
+    <div style={{ height: "85vh", paddingTop: "5rem" }}>
+      <Form style={{ marginLeft: "15rem", marginRight: "15rem" }} onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label style={{ color: "white" }}>Library name</Form.Label>
+          <Form.Control type="text" placeholder="Enter library name" required name="library_name"/>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label style={{ color: "white" }}>
+            Library Description (Optional)
+          </Form.Label>
+          <Form.Control as="textarea" rows={3} name="description"/>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Button type="submit">
+            Create Library
+          </Button>
+        </Form.Group>
+      </Form>
+    </div>
+  );
 }
 
 export default Add_Lib;
