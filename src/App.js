@@ -21,6 +21,7 @@ import Video from "./components/video/video";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import VideoPlayer from "./components/car_race_question_popup/car_race_question_popup"
 
 function App() {
   let auth = useProvideAuth();
@@ -41,6 +42,7 @@ function App() {
             <Route exac path="/" element={<Login auth={auth} />} />
             <Route path="/login" element={<Login auth={auth} />} />
             <Route path="/signup" element={<Signup/>} />
+            <Route path="/session" element ={<VideoPlayer/>}/>
             <Route
               path="/management"
               element={<Home auth={auth} title={title}/>}
