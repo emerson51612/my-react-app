@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./car_race_question_popup.css";
 import video from "./video.mp4";
+import video_sound from "./video_sound.mp4";
 
 const VideoPlayer = () => {
   const videoRef = useRef(null);
@@ -14,12 +15,12 @@ const VideoPlayer = () => {
     // Add more questions here
   ]);
 
-  useEffect(() => {
+  const handleStartVideo = () => {
     if (videoRef.current) {
       videoRef.current.play();
       videoRef.current.addEventListener("ended", handleVideoEnded);
     }
-  }, []);
+  };
 
   const handleVideoEnded = () => {
     setShowQuiz(true);
@@ -31,8 +32,8 @@ const VideoPlayer = () => {
   return (
     <div>
       <div className="video-container">
-        <video width="100%" height="100%" ref={videoRef} autoPlay muted>
-          <source src={video} type="video/mp4" />
+        <video width="100%" height="100%" ref={videoRef} onClick={handleStartVideo}>
+          <source src={video_sound} type="video/mp4" />
         </video>
         {showQuiz && (
           <div className="quiz-overlay">
