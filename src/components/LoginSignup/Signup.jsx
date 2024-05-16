@@ -22,10 +22,13 @@ const Signup = () => {
     }
     delete formJson.confirm_password;
     try {
-      const resp = await axios.post(`${BASE_URL}/api/v1/account/signup`, formJson);
+      const resp = await axios.post(
+        `${BASE_URL}/api/v1/account/signup`,
+        formJson
+      );
       if (resp.data.error_code === 0) {
         setError("");
-        handleGoToLogin()
+        handleGoToLogin();
       }
     } catch (err) {
       setError("Email existed or invalid inputs");
@@ -36,42 +39,50 @@ const Signup = () => {
     window.location.href = "/login";
   };
 
-
   return (
-    <div className="login_container">
-      <div className="header">
-        <div className="login_text">Signup</div>
-        <div className="underline"></div>
+    <div className="login_body">
+      <div className="login_container">
+        <div className="login_header">
+          <div className="login_text">Signup</div>
+          <div className="underline"></div>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="login_inputs">
+            <div className="input">
+              <img src={user_icon} alt="" />
+              <input type="text" placeholder="Name" name="user_name" />
+            </div>
+            <div className="input">
+              <img src={email_icon} alt="" />
+              <input type="email" placeholder="Email" name="email" />
+            </div>
+            <div className="input">
+              <img src={password_icon} alt="" />
+              <input type="password" placeholder="Password" name="password" />
+            </div>
+            <div className="input">
+              <img src={password_icon} alt="" />
+              <input
+                type="password"
+                placeholder=" Confirm Password"
+                name="confirm_password"
+              />
+            </div>
+          </div>
+          <div className="login_error">{error}</div>
+          <div class="forgot_password">
+            Already have an account?
+            <span className="click_here" onClick={handleGoToLogin}>
+              Login
+            </span>
+          </div>
+          <div className="submit_container">
+            <button className="submit" type="submit">
+              Sign Up
+            </button>
+          </div>
+        </form>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="login_inputs">
-          <div className="input">
-            <img src={user_icon} alt="" />
-            <input type="text" placeholder="Name" name="user_name"/>
-          </div>
-          <div className="input">
-            <img src={email_icon} alt="" />
-            <input type="email" placeholder="Email" name="email" />
-          </div>
-          <div className="input">
-            <img src={password_icon} alt="" />
-            <input type="password" placeholder="Password" name="password" />
-          </div>
-          <div className="input">
-            <img src={password_icon} alt="" />
-            <input type="password" placeholder=" Confirm Password" name="confirm_password" />
-          </div>
-        </div>
-        <div className="login_error">{error}</div>
-        <div class="forgot_password">
-          Already have an account?<span className="click_here" onClick={handleGoToLogin}>Login</span>
-        </div>
-        <div className="submit_container">
-          <button className="submit" type="submit">
-            Sign Up
-          </button>
-        </div>
-      </form>
     </div>
   );
 };

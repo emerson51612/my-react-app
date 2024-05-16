@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import _axios, { BASE_URL } from "../../utility/Axios";
 import { Button, Form } from "react-bootstrap";
-import RangeSlider from "react-bootstrap-range-slider";
 import { useNavigate } from "react-router-dom";
 
 function Add_Lib_Sess({ setTitle }) {

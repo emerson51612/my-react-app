@@ -33,12 +33,9 @@ function Home_Lib_Sess({ setTitle }) {
 
   const handleStart = async (id) => {
     try {
-      await _axios.put(
-        `${BASE_URL}/api/v1/session/start/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      await _axios.put(`${BASE_URL}/api/v1/session/start/${id}`, {
+        withCredentials: true,
+      });
       await getListData();
     } catch (error) {
       toast.error(error.response.data.error);
@@ -47,12 +44,9 @@ function Home_Lib_Sess({ setTitle }) {
 
   const handleEnd = async (id) => {
     try {
-      await _axios.put(
-        `${BASE_URL}/api/v1/session/end/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      await _axios.put(`${BASE_URL}/api/v1/session/end/${id}`, {
+        withCredentials: true,
+      });
       await getListData();
     } catch (error) {
       toast.error(error.response.data.error);
@@ -60,13 +54,13 @@ function Home_Lib_Sess({ setTitle }) {
   };
 
   const handleCopyLink = (id) => {
-    const link = window.location.host + '/session/' + id;
+    const link = window.location.host + "/session/" + id;
     navigator.clipboard.writeText(link);
     toast.success("Copied link to clipboard!");
   };
 
   const handleViewResult = (id) => {
-    // todo
+    history(`/management/session/${id}`);
   };
 
   const handleDelete = async (id) => {
@@ -131,15 +125,13 @@ function Home_Lib_Sess({ setTitle }) {
                       Copy Link
                     </Button>
                   )}
-                  {item.session_status !== "CREATED" && (
-                    <Button
-                      className="button_edit1"
-                      style={{ color: "blue" }}
-                      onClick={() => handleViewResult(item._id)}
-                    >
-                      View Result
-                    </Button>
-                  )}
+                  <Button
+                    className="button_edit1"
+                    style={{ color: "blue" }}
+                    onClick={() => handleViewResult(item._id)}
+                  >
+                    View Result
+                  </Button>
                   {item.session_status !== "STARTED" && (
                     <Button
                       className="button_delete1"

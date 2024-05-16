@@ -1,77 +1,171 @@
 .boogaloo-regular {
-    font-family: "Boogaloo", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
+  font-family: "Boogaloo", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.text-in-race {
+  font-size: 60px;
+  font-family: "Boogaloo", sans-serif;
+  color: #0c12ac;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1999;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 30vh;
+}
 
 .quiz-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 50px;
-  }
-  
-  .quiz-container {
-    background-color: white;
-    font-family: "Boogaloo", sans-serif;
-    font-size: xx-large;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    width: 800px;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .options-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .options {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .option-btn {
-    margin: 5px;
-    font-size: x-large;
-    padding: 10px 20px;
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .option-btn.selected {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .score-container {
-    position: fixed;
-    font-family: "Boogaloo", sans-serif;
-    font-size: x-large;
-    bottom: 40px;
-    left: 40px;
-    background-color: white;
-    padding: 50px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+}
+
+.quiz-container {
+  background-color: white;
+  font-family: "Boogaloo", sans-serif;
+  font-size: xx-large;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 70vw;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.options-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.option-btn {
+  min-width: 20vw;
+  margin: 5px;
+  font-size: x-large;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.score-container {
+  position: fixed;
+  font-family: "Boogaloo", sans-serif;
+  font-size: x-large;
+  z-index: 999;
+  bottom: 20px;
+  left: 20px;
+  min-width: 25vw;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  color: 0C12AC;
+  text-align: left;
+}
+
+.skip-question-container {
+  position: fixed;
+  bottom: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.timer {
+  position: fixed;
+  font-family: "Boogaloo", sans-serif;
+  font-size: x-large;
+  z-index: 1999;
+  top: 10px;
+  left: 20px;
+  color: white;
+}
+
+.video-container {
+  height: 100vh;
+}
+
+.enter-name-container {
+  height: 100vh;
+  background-image: url(./entername.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 10vh;
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+.enter-name-form {
+  height: 80vh;
+  background-color: #f0f0f0;
+  opacity: 0.9;
+  padding-top: 10vh;
+}
+
+.player-list {
+  height: 80vh;
+  background-color: #42336f;
+  opacity: 0.82;
+  padding-top: 10vh;
+}
+
+.result-container {
+  height: 100vh;
+  background-image: url(./scoreboard.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 1vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+.result-title {
+  width: 90vw;
+  font-family: "Boogaloo", sans-serif;
+  background-color: white;
+  font-size: 50px;
+  border-radius: 25px;
+  color: 0C12AC;
+  padding: 20px;
+}
+
+.result-list {
+  height: 80vh;
+  background-color: #42336f;
+  opacity: 0.82;
+  padding-top: 10vh;
+  overflow: auto;
+}

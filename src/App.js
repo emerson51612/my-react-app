@@ -19,7 +19,7 @@ import Home_Lib_Car from "./components/Manage_Car_Race/Home_Lib_Car";
 import Edit_Lib_Car from "./components/Manage_Car_Race/Edit_Lib_Car";
 import Add_Lib_Car from "./components/Manage_Car_Race/Add_Lib_Car";
 import SessionForGuest from "./components/car_race_question_popup/SessionForGuest";
-import SessionResult from "./components/Manage_Car_Session/SessionResult";
+import SessionResult from "./components/car_race_question_popup/SessionResult";
 
 function App() {
   let auth = useProvideAuth();
