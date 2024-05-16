@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { ProvideAuth, useProvideAuth } from "./utility/Authentication";
+import { ToastContainer } from "react-toastify";
+import NotFound from "./components/404NotFound";
 import Login from "./components/LoginSignup/Login";
 import Signup from "./components/LoginSignup/Signup";
 import Home from "./components/HomeManagement";
@@ -17,11 +18,8 @@ import Add_Lib_Sess from "./components/Manage_Car_Session/Add_Lib_Sess";
 import Home_Lib_Car from "./components/Manage_Car_Race/Home_Lib_Car";
 import Edit_Lib_Car from "./components/Manage_Car_Race/Edit_Lib_Car";
 import Add_Lib_Car from "./components/Manage_Car_Race/Add_Lib_Car";
-import Video from "./components/video/video";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import VideoPlayer from "./components/car_race_question_popup/car_race_question_popup"
+import SessionForGuest from "./components/car_race_question_popup/SessionForGuest";
+import SessionResult from "./components/Manage_Car_Session/SessionResult";
 
 function App() {
   let auth = useProvideAuth();
@@ -39,28 +37,56 @@ function App() {
       <ProvideAuth>
         <Router>
           <Routes>
-            <Route exac path="/" element={<Login auth={auth} />} />
+            <Route exact path="/" element={<Login auth={auth} />} />
             <Route path="/login" element={<Login auth={auth} />} />
-            <Route path="/signup" element={<Signup/>} />
-            <Route path="/session" element ={<VideoPlayer/>}/>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/session/:id" element={<SessionForGuest />} />
             <Route
               path="/management"
-              element={<Home auth={auth} title={title}/>}
+              element={<Home auth={auth} title={title} />}
             >
-              <Route path="library" element={<Home_Lib setTitle={setTitle}/>} />
-              <Route path="library/edit/:id" element={<Edit_Lib setTitle={setTitle}/>} />
-              <Route path="library/add" element={<Add_Lib setTitle={setTitle}/>} />
-              <Route path="session" element={<Home_Lib_Sess setTitle={setTitle}/>} />
-              <Route path="session/add" element={<Add_Lib_Sess setTitle={setTitle}/>} />
-              <Route path="race" element={<Home_Lib_Car />} setTitle={setTitle}/>
-              <Route path="race/edit/:id" element={<Edit_Lib_Car setTitle={setTitle}/>} />
-              <Route path="race/add" element={<Add_Lib_Car setTitle={setTitle}/>} />
-              <Route path="video/video" element={<Video />} />
-              <Route path="" element={<Home_Lib setTitle={setTitle}/>} />
+              <Route
+                path="library"
+                element={<Home_Lib setTitle={setTitle} />}
+              />
+              <Route
+                path="library/edit/:id"
+                element={<Edit_Lib setTitle={setTitle} />}
+              />
+              <Route
+                path="library/add"
+                element={<Add_Lib setTitle={setTitle} />}
+              />
+              <Route
+                path="session"
+                element={<Home_Lib_Sess setTitle={setTitle} />}
+              />
+              <Route
+                path="session/add"
+                element={<Add_Lib_Sess setTitle={setTitle} />}
+              />
+              <Route
+                path="session/:id"
+                element={<SessionResult setTitle={setTitle}/>}
+              />
+              <Route
+                path="race"
+                element={<Home_Lib_Car setTitle={setTitle} />}
+              />
+              <Route
+                path="race/edit/:id"
+                element={<Edit_Lib_Car setTitle={setTitle} />}
+              />
+              <Route
+                path="race/add"
+                element={<Add_Lib_Car setTitle={setTitle} />}
+              />
+              <Route path="" element={<Home_Lib setTitle={setTitle} />} />
             </Route>
+            <Route path="*" element={<NotFound/>} />
           </Routes>
         </Router>
-        <ToastContainer/>
+        <ToastContainer />
       </ProvideAuth>
     </div>
   );

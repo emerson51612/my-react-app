@@ -64,7 +64,7 @@ const Signup = () => {
         </div>
         <div className="login_error">{error}</div>
         <div class="forgot_password">
-          Already have an account?<span className="click_here">Login</span>
+          Already have an account?<span className="click_here" onClick={handleGoToLogin}>Login</span>
         </div>
         <div className="submit_container">
           <button className="submit" type="submit">

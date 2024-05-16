@@ -106,7 +106,7 @@ function Home_Lib({ setTitle }) {
             ))
           ) : (
             <tr>
-              <td colSpan="3">No data available</td>
+              <td colSpan="4">No data available</td>
             </tr>
           )}
         </Table>

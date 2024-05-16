@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Add_Lib({ setTitle }) {
   useEffect(() => {
-    setTitle("Add Library");
+    setTitle("Create Library");
   }, []);
 
   let history = useNavigate();
@@ -45,7 +45,7 @@ function Add_Lib({ setTitle }) {
           </Form.Label>
           <Form.Control as="textarea" rows={3} name="description"/>
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group>
           <Button type="submit">
             Create Library
           </Button>

@@ -1,42 +1,114 @@
-import react, {useState} from "react";
-import {Button, Form} from "react-bootstrap";
-import Races_Lib_Car from './Races_Lib_Car'; 
-import {v4 as uuid} from "uuid";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import _axios, { BASE_URL } from "../../utility/Axios";
+import { Button, Form } from "react-bootstrap";
+import RangeSlider from "react-bootstrap-range-slider";
+import { useNavigate } from "react-router-dom";
 
-function Add_Lib_Car() {
+function Add_Lib_Car({ setTitle }) {
+  useEffect(() => {
+    setTitle("Create Race");
+    getLibraryList();
+  }, []);
 
-    const [name, setName] = useState("");
-    const [date_of_publish, setDate_of_publish] = useState("");
+  let history = useNavigate();
+  const [bonus, setBonus] = useState(0);
+  const [penalty, setPenalty] = useState(0);
+  const [library, setLibrary] = useState("");
 
-    let history = useNavigate();
-
-    const handleSubmit =(e) => {
-        e.preventDefault();
-        const ids = uuid();
-        let UniqueId = ids.slice(0, 8);
-
-        let a = name,
-        b = date_of_publish;
-
-        Races_Lib_Car.push({id: UniqueId, name: a, date_of_publish: b});
-
-        history("/")
+  const [libraryList, setLibraryList] = useState([]);
+  const getLibraryList = async () => {
+    try {
+      const response = await _axios.get(
+        `${BASE_URL}/api/v1/library/list?page=1&limit=100`,
+        {
+          withCredentials: true,
+        }
+      );
+      setLibraryList(response.data.data.items);
+    } catch (error) {
+      toast.error(error.response.data.error);
     }
+  };
 
-    return <div>
-        <Form className="d_grid_gap_2" style={{margin: "15rem"}}>
-            <Form.Group className="mb_3" controlId="formName">
-                <Form.Control type="text" placeholder="Enter Name" required onChange={(e) => setName(e.target.value)}>
-                </Form.Control>
-            </Form.Group>
-            <Form.Group className="mb_3" controlId="formDate_of_publish">
-                <Form.Control type="text" placeholder="Enter Date of Publish" required onChange={(e) => setDate_of_publish(e.target.value)}>
-                </Form.Control>
-                <Button onClick={(e)=> handleSubmit(e)} type="submit">Submit</Button>
-            </Form.Group>
-        </Form>
-            </div>;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!library) {
+      toast.error("No library has been selected");
+      return
+    }
+    const form = e.target;
+    const formDatas = new FormData(form);
+    const formJson = Object.fromEntries(formDatas.entries());
+    formJson.bonus_time_setting = bonus;
+    formJson.penalty_time_setting = penalty;
+    formJson.library_id = library;
+    try {
+      const resp = await _axios.post(
+        `${BASE_URL}/api/v1/car_race/create`,
+        formJson,
+        {
+          withCredentials: true,
+        }
+      );
+      if (resp.data.error_code === 0) {
+        toast.success("Race added successfully");
+        history("/management/race");
+      } else {
+        toast.error(resp.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.error);
+    }
+  };
+
+  return (
+    <div style={{ height: "85vh", paddingTop: "5rem" }}>
+      <Form
+        style={{ marginLeft: "15rem", marginRight: "15rem" }}
+        onSubmit={handleSubmit}
+      >
+        <Form.Group className="mb-3">
+          <Form.Label style={{ color: "white" }}>Car race name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter race name"
+            required
+            name="car_race_name"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label style={{ color: "white" }}>
+            Race Description (Optional)
+          </Form.Label>
+          <Form.Control as="textarea" rows={3} name="description" />
+        </Form.Group>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Form.Group className="mb-3" style={{ width: "40vw" }}>
+            <Form.Label style={{ color: "white" }}>Linked Library</Form.Label>
+            <Form.Select aria-label="Default select example" required value={library} onChange={(e) => setLibrary(e.target.value)}>
+              <option>Select a library</option>
+              {libraryList && libraryList.length > 0 ? (
+                libraryList.map((item) => (
+                  <option value={item._id}>{item.library_name}</option>
+                ))) : (
+                <option>No library available, please create a library</option>
+              )}
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3" style={{width: "20vw"}}>
+            <Form.Label style={{color: "white"}}>Bonus time setting (second)</Form.Label>
+            <RangeSlider value={bonus} onChange={(e) => setBonus(e.target.value)} min={0} max={10} step={0.1} tooltip="auto"/>
+            <Form.Label style={{color: "white"}}>Penalty time setting (second)</Form.Label>
+            <RangeSlider value={penalty} onChange={(e) => setPenalty(e.target.value)} min={0} max={10} step={0.1} tooltip="auto"/>
+          </Form.Group>
+        </div>
+        <Form.Group>
+          <Button type="submit">Create Race</Button>
+        </Form.Group>
+      </Form>
+    </div>
+  );
 }
 
 export default Add_Lib_Car;

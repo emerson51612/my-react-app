@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import _axios, { BASE_URL } from "../../utility/Axios";
+import AddQuestionModal from "./Add_Question";
+import EditQuestionModal from "./Edit_Question";
 import { toast } from "react-toastify";
 import { Button, Form, Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 function Edit_Lib({ setTitle }) {
+  // Library logic section
   useEffect(() => {
     setTitle("Edit Library");
     handleGetLibrary();
@@ -21,13 +24,16 @@ function Edit_Lib({ setTitle }) {
     const formDatas = new FormData(form);
     const formJson = Object.fromEntries(formDatas.entries());
     try {
-      const resp = await _axios.put(`${BASE_URL}/api/v1/library/${id}`, formJson, {
-        withCredentials: true,
-      });
+      const resp = await _axios.put(
+        `${BASE_URL}/api/v1/library/${id}`,
+        formJson,
+        {
+          withCredentials: true,
+        }
+      );
       if (resp.data.error_code === 0) {
         toast.success("Library updated successfully");
-      }
-      else {
+      } else {
         toast.error(resp.data.message);
       }
     } catch (error) {
@@ -48,6 +54,9 @@ function Edit_Lib({ setTitle }) {
     }
   };
 
+  // ########################
+  // ########################
+  // Questions logic section
   const handleGetQuestions = async () => {
     try {
       const resp = await _axios.get(
@@ -63,12 +72,16 @@ function Edit_Lib({ setTitle }) {
   };
 
   const handleCreate = () => {
-    toast.success("create")
+    setShowCreateQuestion(true);
   };
+  const [showCreateQuestion, setShowCreateQuestion] = useState(false);
 
   const handleEdit = (id) => {
-    toast.success("edit");
+    setSelectedQuestion(id);
+    setShowEditQuestion(true);
   };
+  const [selectedQuestion, setSelectedQuestion] = useState("");
+  const [showEditQuestion, setShowEditQuestion] = useState(false);
 
   const handleCopy = async (id) => {
     try {
@@ -120,18 +133,41 @@ function Edit_Lib({ setTitle }) {
             defaultValue={libraryDescription}
           />
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group >
           <Button type="submit">Update Library</Button>
         </Form.Group>
       </Form>
       <div>
-        <div className="add_div" style={{marginRight: "10%", marginLeft:"10%", display: "flex", justifyContent: "space-between"}}>
-          <div className="title" style={{color: "white"}}>Question List</div>
+        <div
+          className="add_div"
+          style={{
+            marginRight: "10%",
+            marginLeft: "10%",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <div className="title" style={{ color: "white" }}>
+            Question List
+          </div>
           <button className="create-button" onClick={handleCreate}>
             Create Question
           </button>
         </div>
-        <section style={{width: "80%", marginLeft: "10%"}}>
+        <AddQuestionModal
+          show={showCreateQuestion}
+          onHide={() => setShowCreateQuestion(false)}
+          onCreate={() => {setShowCreateQuestion(false); handleGetQuestions()}}
+          library_id={id}
+        />
+        <EditQuestionModal
+          show={showEditQuestion}
+          onHide={() => setShowEditQuestion(false)}
+          onEdit={() => {setShowEditQuestion(false); handleGetQuestions()}}
+          question_id={selectedQuestion}
+          library_id={id}
+        />
+        <section style={{ width: "80%", marginLeft: "10%" }}>
           <Table striped bordered hover size="sm">
             <tr>
               <th className="th_1">Question</th>

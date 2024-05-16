@@ -2,6 +2,7 @@ import axios from "axios";
 import get from "lodash/get";
 
 export const BASE_URL = process.env.REACT_APP_API_URL;
+export const WEBSOCKET_BASE_URL = process.env.REACT_APP_WEBSOCKET_URL;
 const _axios = axios.create({})
 
 _axios.interceptors.request.use(
@@ -29,6 +30,7 @@ _axios.interceptors.request.use(
       const status = get(err, "response.status");
       if ([401, 403].includes(status)) {
         localStorage.removeItem('token');
+        window.location.href = '/login';
       }
       return Promise.reject(err);
     }

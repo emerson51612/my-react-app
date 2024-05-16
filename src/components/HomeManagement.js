@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import _axios, { BASE_URL } from "../utility/Axios";
 import { Outlet, useNavigate } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import logout_icon from "./assets/logout.webp";
+import person from "./assets/person.png";
 import "./home.css";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 
@@ -13,6 +15,8 @@ function Home({ auth, title }) {
     if (!auth.isAuthenticated()) {
       auth.logout();
       window.location.href = "/login";
+    } else {
+      getUserDetails();
     }
   }, [localStorage.getItem("token")]);
   const [show, setShow] = useState(false);
@@ -23,6 +27,19 @@ function Home({ auth, title }) {
     navigate(path);
     handleClose();
   };
+  const [userDetails, setUserDetails] = useState({});
+  const getUserDetails = async () => {
+    try {
+      const response = await _axios.get(`${BASE_URL}/api/v1/account/user`, {
+        withCredentials: true,
+      });
+      setUserDetails(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const [showLogOut, setShowLogOut] = useState(false);
+  const target = useRef(null);
   return (
     <div className="Home">
       <div className="navbar">
@@ -70,12 +87,16 @@ function Home({ auth, title }) {
           ☰
         </div>
         <div className="title">{title}</div>
-        <img
-          className="logout_icon"
-          src={logout_icon}
-          alt=""
-          onClick={logout}
-        />
+        <div className="user-details">
+          <img className="account_icon" src={person} alt="" />
+          <div className="user-name">{userDetails.user_name}</div>
+          <img
+            className="logout_icon"
+            src={logout_icon}
+            alt=""
+            onClick={logout}
+          />
+        </div>
       </div>
       <Outlet />
     </div>

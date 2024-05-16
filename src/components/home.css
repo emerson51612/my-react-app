@@ -10,6 +10,8 @@
 
 .menu-icon {
   margin-left: 20px;
+  margin-right: 120px;
+  font-size: 40px;
   cursor: pointer;
 }
 
@@ -17,6 +19,22 @@
   margin-right: 20px;
   width: 3vw;
   cursor: pointer;
+}
+
+.user-details {
+  display: flex;
+}
+
+.user-name {
+  font-family: "Boogaloo", sans-serif;
+  font-size: 30px;
+  color: darkblue;
+  margin-right: 20px;
+}
+
+.account_icon {
+  margin-right: 10px;
+  width: 3vw;
 }
 
 .menu_item {
@@ -49,6 +67,7 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   color: black;
+  border-radius: 20px;
 }
 
 .table {
@@ -110,8 +129,4 @@ section {
   font-family: "Boogaloo", sans-serif;
   font-size: 50px;
   color: darkblue;
-}
-
-.menu-icon {
-  font-size: 40px;
 }

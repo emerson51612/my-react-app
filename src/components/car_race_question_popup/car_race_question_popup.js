@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./car_race_question_popup.css";
-import video from "./video.mp4";
 import video_sound from "./video_sound.mp4";
 
 const VideoPlayer = () => {
@@ -9,6 +8,11 @@ const VideoPlayer = () => {
   const [quizQuestions, setQuizQuestions] = useState([
     {
       question: "What is the capital of France?",
+      options: ["Paris", "London", "Berlin", "Madrid"],
+      answer: "Paris",
+    },
+    {
+      question: "What is the capital of Hanoi?",
       options: ["Paris", "London", "Berlin", "Madrid"],
       answer: "Paris",
     },
@@ -35,21 +39,20 @@ const VideoPlayer = () => {
         <video width="100%" height="100%" ref={videoRef} onClick={handleStartVideo}>
           <source src={video_sound} type="video/mp4" />
         </video>
-        {showQuiz && (
-          <div className="quiz-overlay">
+          <div className={showQuiz ?"quiz-overlay" : "d-none"}>
             <MultipleChoiceQuiz
               questions={quizQuestions}
               onClose={() => setShowQuiz(false)}
+              startVideo={handleStartVideo}
             />
           </div>
-        )}
         
       </div>
     </div>
   );
 };
 
-const MultipleChoiceQuiz = ({ questions, onClose }) => {
+const MultipleChoiceQuiz = ({ questions, onClose, startVideo }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -58,6 +61,8 @@ const MultipleChoiceQuiz = ({ questions, onClose }) => {
   };
 
   const handleNextQuestion = () => {
+    onClose();
+    startVideo();
     setSelectedOption(null);
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
