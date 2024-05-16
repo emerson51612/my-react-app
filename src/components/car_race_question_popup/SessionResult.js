@@ -18,7 +18,6 @@ const SessionResult = ({ setTitle }) => {
     };
     socket.onmessage = (e) => {
       let data = JSON.parse(e.data);
-      console.log(data);
       if (data.session_status) {
         // Mean first return message
         setStatus(data.session_status);

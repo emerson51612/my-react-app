@@ -16,7 +16,6 @@ const SessionForGuest = () => {
   const [websocket, setWebSocket] = useState(null);
   useEffect(() => {
     let uid = localStorage.getItem("uid");
-    console.log(uid);
     if (!uid) {
       uid = crypto.randomUUID();
       localStorage.setItem("uid", uid);
@@ -29,7 +28,6 @@ const SessionForGuest = () => {
     };
     socket.onmessage = (e) => {
       let data = JSON.parse(e.data);
-      console.log(data);
       if (data.session_status) {
         // Mean first return message
         setStatus(data.session_status);
